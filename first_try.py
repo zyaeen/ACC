@@ -9,7 +9,7 @@ from docx import document
 
 
 n = 10
-k = 30
+k = 24
 
 argument = lambda i: k * i
 
@@ -42,6 +42,43 @@ for i in range(n):
                                  '{:.3f}'.format(c2[i]),
                                  '{:.3f}'.format(B2[i])
                                 ]
+
+
+doc = docx.Document()
+
+parag = doc.add_paragraph('Генерация данных')
+
+
+menuTable = doc.add_table(rows=1,cols=3)
+menuTable.style= 'TableGrid'
+hdr_Cells = menuTable.rows[0].cells
+hdr_Cells[0].text = 'Указатель'
+hdr_Cells[1].text = 'Значения p'
+hdr_Cells[2].text = 'Значения α'
+
+
+for A in data.keys():
+    row_Cells = menuTable.add_row().cells
+    row_Cells[0].text= str(A)
+    row_Cells[1].text = str(data[A][0])
+    row_Cells[2].text = str(data[A][1])
+
+parag = doc.add_paragraph('     ')
+
+menuTable = doc.add_table(rows=1,cols=3)
+menuTable.style= 'TableGrid'
+hdr_Cells = menuTable.rows[0].cells
+hdr_Cells[0].text = 'Указатель'
+hdr_Cells[1].text = 'Значения p'
+hdr_Cells[2].text = 'Значения β'
+
+
+for A in data2.keys():
+    row_Cells = menuTable.add_row().cells
+    row_Cells[0].text= str(A)
+    row_Cells[1].text = str(data2[A][0])
+    row_Cells[2].text = str(data2[A][1])
+
 
 
 # Сортировка
@@ -114,41 +151,6 @@ plt.ylabel('Объемы, b')
 plt.savefig('fig.png')
 plt.show()
 
-
-doc = docx.Document()
-
-parag = doc.add_paragraph('Генерация данных')
-
-
-menuTable = doc.add_table(rows=1,cols=3)
-menuTable.style= 'TableGrid'
-hdr_Cells = menuTable.rows[0].cells
-hdr_Cells[0].text = 'Указатель'
-hdr_Cells[1].text = 'Значения p'
-hdr_Cells[2].text = 'Значения α'
-
-
-for A in Dict.keys():
-    row_Cells = menuTable.add_row().cells
-    row_Cells[0].text= str(A)
-    row_Cells[1].text = str(Dict[A][0])
-    row_Cells[2].text = str(Dict[A][1])
-
-parag = doc.add_paragraph('     ')
-
-menuTable = doc.add_table(rows=1,cols=3)
-menuTable.style= 'TableGrid'
-hdr_Cells = menuTable.rows[0].cells
-hdr_Cells[0].text = 'Указатель'
-hdr_Cells[1].text = 'Значения p'
-hdr_Cells[2].text = 'Значения β'
-
-
-for A in Dict2.keys():
-    row_Cells = menuTable.add_row().cells
-    row_Cells[0].text= str(A)
-    row_Cells[1].text = str(Dict2[A][0])
-    row_Cells[2].text = str(Dict2[A][1])
 
 
 parag = doc.add_paragraph('\n')
